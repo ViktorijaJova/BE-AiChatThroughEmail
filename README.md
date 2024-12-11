@@ -54,3 +54,5 @@ npm start
 or for this case node server.js
 
 The app will run on http://localhost:5000.
+
+Deployed oh Heroku: https://peaceful-beyond-29579-c8ef4e7fc753.herokuapp.com/

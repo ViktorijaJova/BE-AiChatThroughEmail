@@ -191,8 +191,9 @@ function extractUserMessage(rawEmail) {
 
 function sendToAI(userMessage, userEmail) {
   axios
-    .post("http://localhost:5000/ai-conversation", { email: userEmail, message: userMessage })
-    .then((response) => console.log("AI response sent successfully:", response.data))
+   // .post("http://localhost:5000/ai-conversation", { email: userEmail, message: userMessage })
+     .post("https://peaceful-beyond-29579-c8ef4e7fc753.herokuapp.com/ai-conversation", { email: userEmail, message: userMessage })
+   .then((response) => console.log("AI response sent successfully:", response.data))
     .catch((err) => console.error("Error in AI conversation:", err.message));
 }
 
