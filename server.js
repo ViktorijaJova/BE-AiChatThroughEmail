@@ -6,16 +6,14 @@ const cors = require("cors");
 const Imap = require("imap");
 const axios = require("axios");
 require("dotenv").config();
-let invitedEmail = '';  // Store the invited email temporarily
-let messageId = '';     // Store the Message-ID for threading
-let threadMessageId = ''; // Store the thread Message-ID
+let invitedEmail = '';  
+let messageId = '';     // Store the Message-ID for threading not working still working progress
+let threadMessageId = ''; // Store the thread Message-ID not working still working progress
 
-// Initialize Express app
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-// Environment variables
 const { EMAIL_USER, EMAIL_PASS, COHERE_API_KEY, PORT } = process.env;
 
 // Nodemailer setup for SMTP email
@@ -44,8 +42,8 @@ app.post("/send-email", async (req, res) => {
     const mailOptions = {
       from: EMAIL_USER,
       to: email,
-      subject: "Welcome to Sarah Academy AI",
-      text: "Hello! You've been invited to start a conversation with our AI. Reply to this email to begin the conversation.",
+      subject: "Welcome to Sarah Academy",
+      text: "Hello! You've been invited to start a conversation with Sarah Academy.  Apply to join the Sarah Academy today Make yourself more competitive in the UK job market and join a host of other candidates using Sarah to land visa sponsored jobs! Reply to this email to begin the conversation.",
       headers: {
         "Message-ID": messageId,  // Set the Message-ID for the first email
       },
@@ -66,9 +64,6 @@ app.post("/send-email", async (req, res) => {
     res.status(500).json({ error: "Internal server error while sending email." });
   }
 });
-let replyMessageId = ""; // Store the Message-ID of the user's reply
-let recipientEmail = ""; // Store the recipient email dynamically
-// Endpoint to process AI-generated responses using Cohere
 app.post("/ai-conversation", async (req, res) => {
   const { message } = req.body;
 
@@ -205,7 +200,7 @@ function sendToAI(userMessage, userEmail) {
 listenForReplies();
 
 // Start the Express server
-const SERVER_PORT = PORT || 5000;
+const SERVER_PORT = process.env.PORT || 5000;
 app.listen(SERVER_PORT, () => {
   console.log(`Server running on port ${SERVER_PORT}`);
 });
